@@ -14,7 +14,6 @@ const Wishlist = () => {
                 <Products data={wishes} wishlistTitle={false} str={`Wishlist (${wishes.length})`} />
                 :
                 <Empty />
-                // <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque pariatur culpa aliquid ullam tenetur in ipsum dolores, consequatur quas ea qui odit minima molestiae recusandae, expedita excepturi natus nemo. Harum.</h2>
             }
         </>
     )

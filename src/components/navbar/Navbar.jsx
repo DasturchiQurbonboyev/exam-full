@@ -29,7 +29,7 @@ const Navbar = () => {
 
 
   return (
-    <div className="sticky top-0 navbar-shrink">
+    <div className="sticky  navbar-shrink">
       <div className={`shadow-md navbar_animation ${scroll ? "scroll" : ""} w-full z-20 bg-white`}>
         <div className="kontainer flex justify-between items-center">
           <h2 className="text-[24px] font-[700] leading-[24px]">
@@ -74,7 +74,7 @@ const Navbar = () => {
                 placeholder="What are you looking for?"
                 type="text"
                 name=""
-                id=""
+                id="#"
               />
               <FaSearch className="cursor-pointer size-5 " />
             </div>

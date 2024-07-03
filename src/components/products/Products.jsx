@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaArrowLeft, FaArrowRight, FaRegEye, FaRegHeart } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleWishes } from '../../context/wishlistSlice'
@@ -15,6 +15,7 @@ import 'aos/dist/aos.css';
 
 
 const Products = ({ data, str, month, all, hoverBtn, wishlistTitle }) => {
+    const [message, setMessage] = useState('');
     const wishes = useSelector(state => state.wishlist.value)
 
     useEffect(() => {
@@ -23,6 +24,19 @@ const Products = ({ data, str, month, all, hoverBtn, wishlistTitle }) => {
         });
     }, [])
 
+
+    const handleClick = (el) => {
+        const userConfirmed = window.confirm('Siz haqiqatdan ham bu harakatni bajarishni xohlaysizmi?');
+
+        if (userConfirmed) {
+            dispatch(toggleWishes(el))
+            setMessage('Foydalanuvchi tasdiqladi.');
+            toast.error("Wishlistdan o'chirildi")
+        } else {
+            setMessage('Foydalanuvchi rad etdi.');
+        }
+    };
+
     const dispatch = useDispatch()
     let products = data?.slice(0, all)?.map((el) => <div data-aos="fade-up" key={el?.id} className='card w-[277px] border p-[14px]      '>
         <div className='relative z-10'>
@@ -30,8 +44,8 @@ const Products = ({ data, str, month, all, hoverBtn, wishlistTitle }) => {
                 <button onClick={() => dispatch(toggleWishes(el))} className='bg-white flex justify-center items-center rounded-[50%] h-[30px] w-[30px]    '>
                     {
                         wishes.some(w => w?.id == el.id) ?
-                            <FcLike onClick={() => toast.error("Wishlistdan o'chirildi")} className="size-6" /> :
-                            <FaRegHeart onClick={() => toast.success("Wishlistga qo'shildi")} className=' size-6' />
+                            <FcLike className="w-[26px] h-[26px]" /> :
+                            <FaRegHeart className=' size-6' />
                     }
                 </button>
                 <button onClick={() => dispatch(toggleSingle(el))} className='bg-white flex justify-center items-center rounded-[50%] h-[30px] w-[30px]    '>
@@ -40,8 +54,8 @@ const Products = ({ data, str, month, all, hoverBtn, wishlistTitle }) => {
                 </button>
             </div> :
                 <div className='absolute right-4 top-2 flex flex-col gap-2'>
-                    <button onClick={() => dispatch(toggleWishes(el))} className='bg-white flex justify-center items-center rounded-[50%] h-[30px] w-[30px] '>
-                        <RiDeleteBin5Line onClick={() => toast.error("Wishlistdan o'chirildi")} className="size-6" />
+                    <button onClick={() => handleClick(el)} className='bg-white flex justify-center items-center rounded-[50%] h-[30px] w-[30px] '>
+                        <RiDeleteBin5Line className="size-6" />
                     </button>
                 </div>}
             <div onClick={() => dispatch(toggleSingle(el))}>

@@ -22,7 +22,7 @@ const Footer = () => {
                                 </li>
                                 <li className="mb-4">
                                     <div className='flex items-center border  justify-center py-2 rounded-md'>
-                                        <input className='px-[5px] w-[180px]  outline-none bg-black' type="text" name="" id="" placeholder='Enter your email' />
+                                        <input className='px-[5px] w-[180px]  outline-none bg-black' type="text" placeholder='Enter your email' />
                                         <button><img src={right} alt="" /></button>
                                     </div>
                                 </li>

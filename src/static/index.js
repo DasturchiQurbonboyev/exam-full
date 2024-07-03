@@ -107,4 +107,40 @@ export const USERS = [
     job: "Product Designer",
     img: user3,
   },
+  {
+    id: 4,
+    title: "Tom Cruise",
+    job: "Founder & Chairman",
+    img: user1,
+  },
+  {
+    id: 5,
+    title: "Emma Watson",
+    job: "Managing Director",
+    img: user2,
+  },
+  {
+    id: 6,
+    title: "Will Smith",
+    job: "Product Designer",
+    img: user3,
+  },
+  {
+    id: 7,
+    title: "Tom Cruise",
+    job: "Founder & Chairman",
+    img: user1,
+  },
+  {
+    id: 8,
+    title: "Emma Watson",
+    job: "Managing Director",
+    img: user2,
+  },
+  {
+    id: 9,
+    title: "Will Smith",
+    job: "Product Designer",
+    img: user3,
+  },
 ];
