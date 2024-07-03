@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaRegHeart, FaSearch } from "react-icons/fa";
 import { GrCart } from "react-icons/gr";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import './Navbar.css'
 
 const Navbar = () => {
@@ -12,6 +12,7 @@ const Navbar = () => {
   const [scroll, setScroll] = useState(false);
   const [active, setActive] = useState("nav__menu");
   const [toggleIcon, setToggleIcon] = useState("navbar__toggler");
+  const { pathname } = useLocation()
 
   const navToggle = () => {
     setActive(active === 'nav__menu' ? 'nav__menu nav__active' : 'nav__menu');
@@ -43,36 +44,38 @@ const Navbar = () => {
           </h2>
           <ul className={`${active} nav__menu`} >
             <li>
-              <Link onClick={navToggle} className="text-[16px]  hover-underline-animation text-black" to={"/"}>
+              <Link onClick={navToggle} className={`${pathname === '/' && "location"} text-[16px]  hover-underline-animation text-black`} to={"/"}>
                 Home
               </Link>
             </li>
             <li>
-              <Link onClick={navToggle} className="text-[16px] hover-underline-animation" to={"/contact"}>
+              <Link onClick={navToggle} className={`${pathname.includes('contact') && "location"} text-[16px] hover-underline-animation`} to={"/contact"}>
                 Contact
               </Link>
             </li>
             <li>
-              <Link onClick={navToggle} className="text-[16px] hover-underline-animation" to={"/about"}>
+              <Link onClick={navToggle} className={`${pathname.includes('about') && "location"} text-[16px] hover-underline-animation`} to={"/about"}>
                 About
               </Link>
             </li>
             <li>
-              <Link onClick={navToggle} className="text-[16px] hover-underline-animation" to={"/sign-up"}>
+              <Link onClick={navToggle} className={`${pathname.includes('sign-up') && "location"} text-[16px] hover-underline-animation`} to={"/sign-up"}>
                 Sign Up
               </Link>
             </li>
           </ul>
           <div className="max-[830px]:pl-5 flex gap-6 items-center max-[830px]:flex-grow">
-            <div className="bg-[#F5F5F5] flex flex-grow items-center gap-[34px] px-[20px] py-[10px] rounded">
-              <input
-                className="bg-transparent flex-grow w-full outline-none"
-                placeholder="What are you looking for?"
-                type="text"
-                name=""
-                id="#"
-              />
-              <FaSearch className="cursor-pointer size-5 " />
+            <div className="flex-grow">
+              <div className="search">
+                <input
+                  className="bg-transparent flex-grow w-full outline-none"
+                  placeholder="What are you looking for?"
+                  type="text"
+                  name=""
+                  id="#"
+                />
+                <FaSearch className="cursor-pointer size-5 " />
+              </div>
             </div>
             <div className="hidden min-[830px]:flex items-center  gap-3">
               <Link className="flex" to={"/wishlist"}>

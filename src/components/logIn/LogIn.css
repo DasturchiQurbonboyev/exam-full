@@ -16,7 +16,13 @@
 }
 
 .hover-underline-animation:hover::after {
-    width: 100%;
     left: 0;
+    width: 100%;
     background: #DB4444;
+}
+
+.location {
+    border-bottom: 1px solid #DB4444;
+    padding-bottom: 7px;
+
 }

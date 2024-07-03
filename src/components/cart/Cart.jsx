@@ -40,7 +40,7 @@ const Cart = () => {
         </div>)
     return (
 
-        <div className='pt-[120px]    '>
+        <div className='pt-[60px]    '>
             <div className='kontainer grid gap-10'>
                 <div className='text-end flex justify-end'>
                     <button onClick={() => dispatch(clearCart())} className=' flex items-center gap-3'><FaRegTrashAlt className='size-7' /> Clear All </button>

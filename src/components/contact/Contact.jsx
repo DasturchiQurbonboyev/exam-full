@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import phone from "../../assets/images/home/phone.png";
 import sms from "../../assets/images/home/sms.png";
 const ContactComponent = () => {
 
+    useEffect(() => {
+        scrollTo(0, 0)
+    }, [])
 
     const [isBouncing, setIsBouncing] = useState(false);
 
@@ -13,7 +16,7 @@ const ContactComponent = () => {
 
     return (
         <div className="kontainer contact">
-            <div className="min-[950px]:flex gap-[30px] pt-[80px] ">
+            <div className="min-[950px]:flex gap-[30px] pt-[60px] ">
                 <div className="max-[600px]:block   max-[950px]:flex max-[950px]:justify-between max-[950px]:gap-5 shadow-custom  rounded-[4px] max-[600px]:px-4 max-[600px]:py-5   min-[600px]:px-8 min-[600px]:py-10   ">
                     <div className="min-[600px]:min-w-[220px]">
                         <div className="flex items-center gap-4 pb-6">

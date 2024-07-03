@@ -2,15 +2,16 @@ import React from 'react'
 import right from "../../assets/images/footer/icon-send.png"
 import qrKode from "../../assets/images/footer/qr-kode.png"
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
         <div>
 
 
-            <footer className="bg-black mt-10">
+            <footer className="bg-black pt-10 mt-10">
                 <div className="">
-                    <div className="grid  kontainer  grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-5">
+                    <div className="grid  kontainer min-[530px]:grid-cols-2  min-[740px]:grid-cols-3 gap-8 px-4 py-6 lg:py-8 min-[1030px]:grid-cols-5">
                         <div>
                             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Exclusive</h2>
                             <ul className="text-gray-500 dark:text-gray-400 font-medium">
@@ -20,9 +21,9 @@ const Footer = () => {
                                 <li className="mb-4">
                                     <a href="#" className="hover:underline">Get 10% off your first order</a>
                                 </li>
-                                <li className="mb-4">
-                                    <div className='flex items-center border  justify-center py-2 rounded-md'>
-                                        <input className='px-[5px] w-[180px]  outline-none bg-black' type="text" placeholder='Enter your email' />
+                                <li className="mb-4 flex-grow">
+                                    <div className='flex items-center flex-grow border  justify-center py-2 rounded-md'>
+                                        <input className='px-[5px] flex-grow w-full  outline-none bg-black' type="text" placeholder='Enter your email' />
                                         <button><img src={right} alt="" /></button>
                                     </div>
                                 </li>
@@ -46,19 +47,19 @@ const Footer = () => {
                             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Account</h2>
                             <ul className="text-gray-500 dark:text-gray-400 font-medium">
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">My Account</a>
+                                    <Link to={"/account"} className="hover:underline">My Account</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Login / Register</a>
+                                    <Link to={"/log-in"} className="hover:underline">Login / Register</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Cart</a>
+                                    <Link to={"/cart"} className="hover:underline">Cart</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Wishlist</a>
+                                    <Link to={"/wishlist"} className="hover:underline">Wishlist</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Shop</a>
+                                    <Link to={"/cart"} className="hover:underline">Shop</Link>
                                 </li>
                             </ul>
                         </div>

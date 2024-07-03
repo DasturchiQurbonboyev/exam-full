@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import login from '../../assets/images/logIn/Side.png';
 import './LogIn.css'
 
 const LogIn = () => {
+
+    useEffect(() => {
+        scrollTo(0, 0)
+    }, [])
+
+
     const [isEmailFocused, setIsEmailFocused] = useState(false);
     const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
@@ -18,7 +24,7 @@ const LogIn = () => {
 
     return (
         <div className='kontainer'>
-            <div className='pt-[110px] grid min-[800px]:grid-cols-2 gap-[50px]'>
+            <div className='pt-[60px] grid min-[800px]:grid-cols-2 gap-[50px]'>
                 <div className='max-[800px]:hidden '>
                     <img src={login} alt="" />
                 </div>

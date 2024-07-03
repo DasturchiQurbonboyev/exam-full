@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import login from "../../assets/images/logIn/Side.png";
 import google from "../../assets/images/logIn/Icon-Google.png";
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
+
+
+    useEffect(() => {
+        scrollTo(0, 0)
+    }, [])
+
     const [isNameFocused, setIsNameFocused] = useState(false);
     const [isEmailFocused, setIsEmailFocused] = useState(false);
     const [isPasswordFocused, setIsPasswordFocused] = useState(false);
@@ -20,7 +26,7 @@ const SignUp = () => {
 
     return (
         <div className='kontainer'>
-            <div className='pt-[110px] grid min-[800px]:grid-cols-2 items-center gap-[50px]'>
+            <div className='pt-[60px] grid min-[800px]:grid-cols-2 items-center gap-[50px]'>
                 <div className='max-[800px]:hidden'>
                     <img src={login} alt="" />
                 </div>
