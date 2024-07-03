@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import login from '../../assets/images/logIn/Side.png';
+import './LogIn.css'
 
 const LogIn = () => {
     const [isEmailFocused, setIsEmailFocused] = useState(false);
@@ -59,7 +60,7 @@ const LogIn = () => {
                         <button className='px-[48px] py-[16px] bg-[#DB4444] text-white rounded-md transform transition-transform duration-300 hover:scale-105 active:scale-95'>
                             Log In
                         </button>
-                        <p className='text-[#DB4444] cursor-pointer max-[400px]:pb-6  '>Forget Password?</p>
+                        <p className='text-[#DB4444] cursor-pointer max-[400px]:pb-6 hover-underline-animation  '>Forget Password?</p>
                     </div>
                 </div>
             </div>

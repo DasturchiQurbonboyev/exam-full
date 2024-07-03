@@ -10,6 +10,13 @@ const Navbar = () => {
   const carts = useSelector((state) => state.cart.value).length;
 
   const [scroll, setScroll] = useState(false);
+  const [active, setActive] = useState("nav__menu");
+  const [toggleIcon, setToggleIcon] = useState("navbar__toggler");
+
+  const navToggle = () => {
+    setActive(active === 'nav__menu' ? 'nav__menu nav__active' : 'nav__menu');
+    setToggleIcon(toggleIcon === 'navbar__toggler' ? 'navbar__toggler toggle' : 'navbar__toggler');
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +34,6 @@ const Navbar = () => {
     };
   }, []);
 
-
   return (
     <div className="sticky  navbar-shrink">
       <div className={`shadow-md navbar_animation ${scroll ? "scroll" : ""} w-full z-20 bg-white`}>
@@ -35,42 +41,32 @@ const Navbar = () => {
           <h2 className="text-[24px] font-[700] leading-[24px]">
             <Link to={"/"}>Exclusive</Link>
           </h2>
-          <ul className="flex gap-4">
+          <ul className={`${active} nav__menu`} >
             <li>
-              <Link className="text-[16px]" to={"/"}>
+              <Link onClick={navToggle} className="text-[16px]  hover-underline-animation text-black" to={"/"}>
                 Home
               </Link>
             </li>
             <li>
-              <Link className="text-[16px]" to={"/contact"}>
+              <Link onClick={navToggle} className="text-[16px] hover-underline-animation" to={"/contact"}>
                 Contact
               </Link>
             </li>
             <li>
-              <Link className="text-[16px]" to={"/about"}>
+              <Link onClick={navToggle} className="text-[16px] hover-underline-animation" to={"/about"}>
                 About
               </Link>
             </li>
-            {/* <li>
-              <Link className="text-[16px]" to={"/log-in"}>
-                Sign In
-              </Link>
-            </li> */}
             <li>
-              <Link className="text-[16px]" to={"/sign-up"}>
+              <Link onClick={navToggle} className="text-[16px] hover-underline-animation" to={"/sign-up"}>
                 Sign Up
               </Link>
             </li>
-            {/* <li>
-              <Link className="text-[16px]" to={"/account"}>
-                Account
-              </Link>
-            </li> */}
           </ul>
-          <div className="flex gap-6 items-center">
-            <div className="bg-[#F5F5F5] flex items-center gap-[34px] px-[20px] py-[10px] rounded">
+          <div className="max-[830px]:pl-5 flex gap-6 items-center max-[830px]:flex-grow">
+            <div className="bg-[#F5F5F5] flex flex-grow items-center gap-[34px] px-[20px] py-[10px] rounded">
               <input
-                className="bg-transparent outline-none"
+                className="bg-transparent flex-grow w-full outline-none"
                 placeholder="What are you looking for?"
                 type="text"
                 name=""
@@ -78,26 +74,33 @@ const Navbar = () => {
               />
               <FaSearch className="cursor-pointer size-5 " />
             </div>
-            <Link className="flex" to={"/wishlist"}>
-              <span>
-                <FaRegHeart className="cursor-pointer size-6" />
-              </span>
-              {wishes ? (
-                <sup className="bg-red-500 w-4 h-4 rounded-[50%] flex justify-center items-center text-white">
-                  {wishes}
-                </sup>
-              ) : null}
-            </Link>
-            <Link className="text-[16px] flex" to={"/cart"}>
-              <span>
-                <GrCart className="cursor-pointer size-6" />
-              </span>
-              {carts ? (
-                <sup className="bg-red-500 w-4 h-4 rounded-[50%] flex justify-center items-center text-white">
-                  {carts}
-                </sup>
-              ) : null}
-            </Link>
+            <div className="hidden min-[830px]:flex items-center  gap-3">
+              <Link className="flex" to={"/wishlist"}>
+                <span>
+                  <FaRegHeart className="cursor-pointer size-6" />
+                </span>
+                {wishes ? (
+                  <sup className="bg-red-500 w-4 h-4 rounded-[50%] flex justify-center items-center text-white">
+                    {wishes}
+                  </sup>
+                ) : null}
+              </Link>
+              <Link className="text-[16px] flex" to={"/cart"}>
+                <span>
+                  <GrCart className="cursor-pointer size-6" />
+                </span>
+                {carts ? (
+                  <sup className="bg-red-500 w-4 h-4 rounded-[50%] flex justify-center items-center text-white">
+                    {carts}
+                  </sup>
+                ) : null}
+              </Link>
+            </div>
+          </div>
+          <div onClick={navToggle} className={toggleIcon}>
+            <div className="line1"></div>
+            <div className="line2"></div>
+            <div className="line3"></div>
           </div>
         </div>
       </div>
