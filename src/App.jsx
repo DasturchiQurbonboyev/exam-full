@@ -18,7 +18,6 @@ import Account from "./pages/account/Account";
 import Contact from "./pages/contact/Contact";
 import NavbarTop from "./components/navbar/NavbarTop.jsx";
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <div>
@@ -28,7 +27,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/single" element={<Single />} />
+        <Route path="/single/:id" element={<Single />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/checkOut" element={<CheckOut />} />

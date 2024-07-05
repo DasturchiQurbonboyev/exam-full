@@ -7,42 +7,27 @@ import Category from "../../components/category/Category";
 import Sale from "../../components/sale/Sale";
 import Delev from "../../components/delev/Delev";
 import Arrival from "../../components/arrival/Arrival.jsx";
+import { useGetProductQuery } from "../../context/productApi.js";
+import Loading from "../../components/loading/Loading.jsx";
+
 
 const Home = () => {
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("/products")
-      .then((res) => setData(res.data.products))
-      .catch((err) => console.log(err));
-  }, []);
+  const { data, error, isLoading } = useGetProductQuery()
+
+  { isLoading && <Loading /> }
 
   return (
-    <div>
+    <>
       <Hero />
-      <Products
-        data={data}
-        str={"Best Selling Products"}
-        month={"This Month"}
-        all={4}
-        hoverBtn={false}
-        wishlistTitle={true}
-      />
+      <Products />
       <Category />
       <Sale />
       <Music />
-      <Products
-        data={data}
-        str={"Explore Our Products"}
-        month={"Our Products"}
-        all={8}
-        hoverBtn={true}
-        wishlistTitle={true}
-      />
+      <Products />
       <Arrival />
       <Delev />
-    </div>
+    </>
   );
 };
 

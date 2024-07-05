@@ -1,16 +1,12 @@
-import React from 'react'
-import { SunspotLoader } from "react-awesome-loaders";
-export const SunspotLoaderComponent = () => {
-    return (
-        <>
-            <SunspotLoader
-                gradientColors={["#6366F1", "#E0E7FF"]}
-                shadowColor={"#3730A3"}
-                desktopSize={"128px"}
-                mobileSize={"100px"}
-            />
-        </>
-    );
-};
+import React, { memo } from 'react'
+import "./Loading.css"
 
-export default SunspotLoaderComponent
+const Loading = () => {
+    return (
+        <div className="loading__box">
+            <div className='loader'></div>
+        </div>
+    )
+}
+
+export default memo(Loading)
