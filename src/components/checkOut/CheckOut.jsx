@@ -1,10 +1,58 @@
 import React, { useEffect, useState } from 'react';
 import frame from "../../assets/images/checkout/Frame.png";
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { clearCart } from '../../context/cartSlice';
+
+const BOT_TOKEN = "7479336002:AAE-fiEczU4hqcNKjmeBKZhRtwj_toutzJI"
+const CHAT_ID = "-4218604797"
 
 const CheckOut = () => {
     const carts = useSelector(state => state.cart.value);
+
+    const [person, setPerson] = useState("");
+    const [company, setCompany] = useState("");
+    const [address, setAddress] = useState("");
+    const [optional, setOptional] = useState("");
+    const [city, setCity] = useState("");
+    const [number, setNumber] = useState("");
+    const [email, setEmail] = useState("");
+    const [saveInfo, setSaveInfo] = useState(false);
+    const [paymentMethod, setPaymentMethod] = useState("bank");
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handlePayment = (e) => {
+        let text = "Buyurtma %0A%0A"
+        text += `Ismi Familyasi: ${person} %0A`
+        text += `Kampaniya nomi: ${company} %0A`
+        text += `Address: ${address} %0A`
+        text += `Buyritmachi fikri: ${optional} %0A`
+        text += `Shahar: ${city} %0A`
+        text += `Telefon: ${number} %0A`
+        text += `Email: ${email} %0A%0A`
+
+        let quantity = 1
+        carts?.forEach(el => {
+            text += `<b>Maxsulot: ${quantity}</b> %0A%0A`
+            text += `Nomi: ${el.title} %0A`
+            text += `Miqdori: ${el.quantity} %0A`
+            text += `Narxi: ${el.price} $ %0A%0A`
+            quantity++
+        })
+
+        let url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${text}&parse_mode=html`
+        let api = new XMLHttpRequest()
+        api.open("GET", url, true)
+        api.send()
+        dispatch(clearCart())
+        window.scrollTo(0, 0)
+        toast.success("Buyurtma qabul qilindi, tez orada siz bilan bog'lanamiz")
+
+        navigate('/'); // Home sahifasiga yo'naltirish
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -56,6 +104,9 @@ const CheckOut = () => {
                                 First Name*
                             </label>
                             <input
+                                required
+                                value={person}
+                                onChange={(e) => setPerson(e.target.value)}
                                 type='text'
                                 id='firstName'
                                 className={`outline-none border-b-2 px-4 bg-[#F5F5F5] w-full h-[50px] transition-all duration-300 ease-in-out ${isFirstNameFocused ? 'border-blue-500' : 'border-gray-300'}`}
@@ -68,6 +119,9 @@ const CheckOut = () => {
                                 Company Name
                             </label>
                             <input
+                                required
+                                value={company}
+                                onChange={(e) => setCompany(e.target.value)}
                                 type='text'
                                 id='companyName'
                                 className={`outline-none border-b-2 px-4 bg-[#F5F5F5] w-full h-[50px] transition-all duration-300 ease-in-out ${isCompanyNameFocused ? 'border-blue-500' : 'border-gray-300'}`}
@@ -80,6 +134,9 @@ const CheckOut = () => {
                                 Street Address*
                             </label>
                             <input
+                                required
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
                                 type='text'
                                 id='streetAddress'
                                 className={`outline-none border-b-2 px-4 bg-[#F5F5F5] w-full h-[50px] transition-all duration-300 ease-in-out ${isStreetAddressFocused ? 'border-blue-500' : 'border-gray-300'}`}
@@ -92,6 +149,8 @@ const CheckOut = () => {
                                 Apartment, floor, etc. (optional)
                             </label>
                             <input
+                                value={optional}
+                                onChange={(e) => setOptional(e.target.value)}
                                 type='text'
                                 id='optionalAddress'
                                 className={`outline-none border-b-2 px-4 bg-[#F5F5F5] w-full h-[50px] transition-all duration-300 ease-in-out ${isOptionalAddressFocused ? 'border-blue-500' : 'border-gray-300'}`}
@@ -104,6 +163,9 @@ const CheckOut = () => {
                                 Town/City*
                             </label>
                             <input
+                                required
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
                                 type='text'
                                 id='townCity'
                                 className={`outline-none border-b-2 px-4 bg-[#F5F5F5] w-full h-[50px] transition-all duration-300 ease-in-out ${isTownCityFocused ? 'border-blue-500' : 'border-gray-300'}`}
@@ -116,6 +178,9 @@ const CheckOut = () => {
                                 Phone Number*
                             </label>
                             <input
+                                required
+                                value={number}
+                                onChange={(e) => setNumber(e.target.value)}
                                 type='text'
                                 id='phoneNumber'
                                 className={`outline-none border-b-2 px-4 bg-[#F5F5F5] w-full h-[50px] transition-all duration-300 ease-in-out ${isPhoneNumberFocused ? 'border-blue-500' : 'border-gray-300'}`}
@@ -128,6 +193,9 @@ const CheckOut = () => {
                                 Email Address*
                             </label>
                             <input
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 type='text'
                                 id='emailAddress'
                                 className={`outline-none border-b-2 px-4 bg-[#F5F5F5] w-full h-[50px] transition-all duration-300 ease-in-out ${isEmailAddressFocused ? 'border-blue-500' : 'border-gray-300'}`}
@@ -136,8 +204,13 @@ const CheckOut = () => {
                             />
                         </div>
                         <div className='flex gap-2 items-center'>
-                            <input type='checkbox' />
-                            <p>Save this information for faster check-out next time</p>
+                            <input
+                                id='#save'
+                                type='checkbox'
+                                checked={saveInfo}
+                                onChange={(e) => setSaveInfo(e.target.checked)}
+                            />
+                            <label className='cursor-default' htmlFor='#save'>Save this information for faster check-out next time</label>
                         </div>
                     </div>
                     <div className='flex-grow'>
@@ -158,14 +231,28 @@ const CheckOut = () => {
                         </div>
                         <div className='flex gap-4 justify-between mb-8'>
                             <div className='flex gap-4 items-center'>
-                                <input type='radio' />
-                                <p>Bank</p>
+                                <input
+                                    id='#bank'
+                                    type='radio'
+                                    name='paymentMethod'
+                                    value="bank"
+                                    checked={paymentMethod === "bank"}
+                                    onChange={(e) => setPaymentMethod(e.target.value)}
+                                />
+                                <label className='cursor-pointer' htmlFor='#bank'>Bank</label>
                             </div>
                             <img src={frame} alt='' />
                         </div>
                         <div className='flex gap-4 mb-8 items-center'>
-                            <input type='radio' />
-                            <p>Cash on delivery</p>
+                            <input
+                                id='#cash'
+                                type='radio'
+                                name='paymentMethod'
+                                value="cash"
+                                checked={paymentMethod === "cash"}
+                                onChange={(e) => setPaymentMethod(e.target.value)}
+                            />
+                            <label className='cursor-pointer' htmlFor='#cash'>Cash on delivery</label>
                         </div>
                         <div className=' relative flex max-[530px]:flex-col gap-4 items-start mb-8'>
                             <label htmlFor='streetAddress' className={`absolute left-3 transition-all duration-300 ease-in-out ${isCouponFocused ? '-top-5 text-blue-500 text-sm' : 'top-2 text-gray-500'}`}>
@@ -182,7 +269,7 @@ const CheckOut = () => {
                                 Apply Coupon
                             </button>
                         </div>
-                        <button className='px-12 py-4 border rounded-md text-white bg-[#DB4444]'>
+                        <button onClick={() => { handlePayment() }} className='px-12 py-4 border rounded-md text-white bg-[#DB4444]'>
                             Place Order
                         </button>
                     </div>

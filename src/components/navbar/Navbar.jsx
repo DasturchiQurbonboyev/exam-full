@@ -77,7 +77,7 @@ const Navbar = () => {
                 <FaSearch className="cursor-pointer size-5 " />
               </div>
             </div>
-            <div className="hidden min-[830px]:flex items-center  gap-3">
+            <div className="flex items-center  gap-3">
               <Link className="flex" to={"/wishlist"}>
                 <span>
                   <FaRegHeart className="cursor-pointer size-6" />

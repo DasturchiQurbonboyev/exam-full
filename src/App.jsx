@@ -17,6 +17,9 @@ import "./sass/global.scss";
 import Account from "./pages/account/Account";
 import Contact from "./pages/contact/Contact";
 import NavbarTop from "./components/navbar/NavbarTop.jsx";
+import Auth from './components/auth/Auth.jsx'
+import YouTube from "./components/loading/LoadingProduct.jsx";
+
 function App() {
 
   return (
@@ -24,16 +27,19 @@ function App() {
       <NavbarTop />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/single/:id" element={<Single />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/checkOut" element={<CheckOut />} />
         <Route path="/log-in" element={<LogIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/account" element={<Account />} />
+        <Route path="/loading" element={<YouTube />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Auth />}>
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/single/:id" element={<Single />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/checkOut" element={<CheckOut />} />
+          <Route path="/sign-up" element={<SignUp />} />
+        </Route>
       </Routes>
       <Footer />
       <ToastContainer />

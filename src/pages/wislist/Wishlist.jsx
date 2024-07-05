@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import Products from '../../components/products/Products';
 import emptyWishlist from '../../assets/images/empty/empty-wishlist.webp'
 import { Link } from 'react-router-dom';
+import WishlistComponent from '../../components/wishlest/WishlistComponent';
 
 const Wishlist = () => {
     useEffect(() => {
@@ -12,7 +13,17 @@ const Wishlist = () => {
     return (
         <>
             {(wishes.length > 0 ? true : false) ?
-                <Products data={wishes} wishlistTitle={false} str={`Wishlist (${wishes.length})`} />
+                <div>
+                    <WishlistComponent />
+                    <Products
+                        homeTitle=""
+                        homeType="Just For You"
+                        allProductBtnbottom=""
+                        allProductBtntop="true"
+                        buttonNext=""
+                        productSize={4}
+                    />
+                </div>
                 :
                 <div>
                     <div className='flex justify-center items-center'>

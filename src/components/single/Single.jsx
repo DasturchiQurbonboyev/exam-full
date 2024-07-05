@@ -8,11 +8,13 @@ import { addToCart, decCart, incCart, removeFromCart } from '../../context/cartS
 
 import './Single.css'
 import { toggleToWishes } from "../../context/wishlistSlice";
+import LoadingSinlePage from "../loading/LoadingSinlePage";
 
 
 const Single = () => {
   const { id } = useParams()
   const { data, isLoading } = useGetProductQuery(id)
+  console.log(isLoading);
 
   let product = data?.find(el => +el.id === +id)
 
@@ -25,7 +27,7 @@ const Single = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
 
   let addCart;
 
@@ -39,6 +41,12 @@ const Single = () => {
       dispatch(removeFromCart(product))
     }
     dispatch(decCart(product))
+  }
+
+  if (isLoading) {
+    return (
+      <LoadingSinlePage />
+    )
   }
 
   return (
@@ -189,7 +197,7 @@ const Single = () => {
                 </div>
               </div>
               <h6 className="font-manrope font-semibold text-2xl leading-9 text-gray-900 pr-5 sm:border-r border-gray-200 mr-5">
-                $ {product?.price}
+                $ {product?.price * (cart.find(item => item.id === product?.id)?.quantity || 1)}
               </h6>
               <p className="text-gray-500 text-base font-normal  mb-4">
                 {product?.description}

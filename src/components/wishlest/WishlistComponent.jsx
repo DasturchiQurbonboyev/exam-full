@@ -11,13 +11,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
-import './ProductSwiper.css';
+import '../products/ProductSwiper.css';
 import { EffectCube, Pagination } from 'swiper/modules';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const Products = ({ homeTitle, homeType, buttonNext, allProductBtntop, allProductBtnbottom, productSize }) => {
+const WishlistComponent = () => {
     const wishlist = useSelector(state => state.wishlist.value)
     const cart = useSelector(state => state.cart.value);
 
@@ -29,10 +29,10 @@ const Products = ({ homeTitle, homeType, buttonNext, allProductBtntop, allProduc
         });
     }, [])
 
-    const [allProduct, setAllProduct] = useState(productSize)
+    const [allProduct, setAllProduct] = useState(4)
 
     const dispatch = useDispatch()
-    let products = data?.slice(0, allProduct)?.map((el) =>
+    let products = wishlist?.slice(0, allProduct)?.map((el) =>
         <div data-aos="fade-up" key={el.id} className='card w-[277px] border p-[14px]      '>
             <div className='relative z-10'>
 
@@ -58,7 +58,6 @@ const Products = ({ homeTitle, homeType, buttonNext, allProductBtntop, allProduc
                 <div >
                     <Link >
                         {/* to={`/single/${el.id}`} */}
-
                         <div className='product__img__cart'>
                             <Swiper
                                 effect={'cube'}
@@ -109,41 +108,16 @@ const Products = ({ homeTitle, homeType, buttonNext, allProductBtntop, allProduc
     return (
         <div className='kontainer'>
             <div className='pt-[60px]'>
-
-                {homeType && <div data-aos="fade-up" className='flex items-center gap-2'>
-                    <div className='w-[20px] rounded-md bg-red-500 h-10'></div>
-                    <h1 className='text-red-500'>{homeType}</h1>
-                </div>}
-
                 <div data-aos="fade-up" className='flex justify-between items-center '>
-                    <h2 className='text-[36px] font-[600]'>{homeTitle}</h2>
-                    {
-                        allProductBtntop &&
-                        <button onClick={() => setAllProduct(data?.length)} className='bg-red-500 px-[48px] py-[16px] rounded-md  text-white  '>View All</button>
-
-                    }
-                    {
-                        buttonNext &&
-                        <div className='flex gap-3'>
-                            <div className='w-[46px] h-[46px] bg-[#F5F5F5] flex justify-center items-center rounded-[50%]  '><FaArrowLeft /></div>
-                            <div className='w-[46px] h-[46px] bg-[#F5F5F5] flex justify-center items-center rounded-[50%]  '><FaArrowRight /></div>
-                        </div>
-                    }
-
-
-
+                    <h2 className='text-[36px] font-[600]'>Wishlist (4)</h2>
+                    <button onClick={() => setAllProduct(wishlist.length)} className='border border-[#000] font-[500] px-[48px] py-[16px] rounded-md   '>Move All To Bag</button>
                 </div>
                 <div className="wrapper flex flex-wrap justify-center max-[911px]:justify-between    py-[50px] gap-[10px]   ">
                     {products}
                 </div>
-                {
-                    allProductBtnbottom &&
-                    <div data-aos="fade-up" className='text-center'><button onClick={() => setAllProduct(data?.length)} className='bg-red-500 px-[48px] py-[16px] rounded-md  text-white  '>View All Products </button></div>
-                }
-
             </div>
         </div>
     )
 }
 
-export default Products
+export default WishlistComponent
