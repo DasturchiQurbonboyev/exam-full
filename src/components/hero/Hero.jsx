@@ -21,7 +21,7 @@ const Hero = () => {
     }, [])
     return (
         <div className='kontainer'>
-            <div className='pb-6 pt-[60px]     '>
+            <div className=' pt-[60px]     '>
                 <Swiper
                     spaceBetween={0}
                     centeredSlides={true}
@@ -60,9 +60,6 @@ const Hero = () => {
                     </SwiperSlide>
 
                 </Swiper>
-
-                <div data-aos="zoom-in" className='mb-[40px] pt-[40px]   '>
-                </div>
             </div>
         </div>
     )

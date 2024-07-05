@@ -33,7 +33,7 @@ const Products = ({ homeTitle, homeType, buttonNext, allProductBtntop, allProduc
 
     const dispatch = useDispatch()
     let products = data?.slice(0, allProduct)?.map((el) =>
-        <div data-aos="fade-up" key={el.id} className='card w-[277px] border p-[14px]      '>
+        <div data-aos="fade-up" key={el.id} className='card w-[277px] border p-[14px]  bg-[#F5F5F5] rounded-lg     '>
             <div className='relative z-10'>
 
                 {wishlist &&
