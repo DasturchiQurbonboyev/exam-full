@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { toggleToWishes } from '../../context/wishlistSlice'
 import { addToCart } from '../../context/cartSlice'
 import { useGetProductQuery } from '../../context/productApi'
+import { useGetCategoryQuery } from '../../context/categoryApi'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -16,12 +17,20 @@ import { EffectCube, Pagination } from 'swiper/modules';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Loading from '../loading/Loading'
 
 const Products = ({ homeTitle, homeType, buttonNext, allProductBtntop, allProductBtnbottom, productSize }) => {
+
+    const [categoryValue, setCategoryValue] = useState("")
+    const { data: dataGetCategory } = useGetCategoryQuery()
+    const { data, isError, isLoading } = useGetProductQuery()
+
+    const filteredProduct = categoryValue
+        ? data?.filter(el => el.category === categoryValue)
+        : data;
+
     const wishlist = useSelector(state => state.wishlist.value)
     const cart = useSelector(state => state.cart.value);
-
-    const { data, isError, isLoading } = useGetProductQuery()
 
     useEffect(() => {
         AOS.init({
@@ -32,7 +41,7 @@ const Products = ({ homeTitle, homeType, buttonNext, allProductBtntop, allProduc
     const [allProduct, setAllProduct] = useState(productSize)
 
     const dispatch = useDispatch()
-    let products = data?.slice(0, allProduct)?.map((el) =>
+    let products = filteredProduct?.slice(0, allProduct)?.map((el) =>
         <div data-aos="fade-up" key={el.id} className='card w-[277px] border p-[14px]  bg-[#F5F5F5] rounded-lg     '>
             <div className='relative z-10'>
 
@@ -105,6 +114,11 @@ const Products = ({ homeTitle, homeType, buttonNext, allProductBtntop, allProduc
         </div >
     )
 
+    if (isLoading) {
+        return (
+            <Loading />
+        )
+    }
 
     return (
         <div className='kontainer'>
@@ -115,7 +129,9 @@ const Products = ({ homeTitle, homeType, buttonNext, allProductBtntop, allProduc
                     <h1 className='text-red-500'>{homeType}</h1>
                 </div>}
 
-                <div data-aos="fade-up" className='flex justify-between items-center '>
+
+
+                <div data-aos="fade-up" className='flex justify-between items-center mb-[25px] '>
                     <h2 className='text-[36px] font-[600]'>{homeTitle}</h2>
                     {
                         allProductBtntop &&
@@ -131,9 +147,41 @@ const Products = ({ homeTitle, homeType, buttonNext, allProductBtntop, allProduc
                     }
 
 
-
                 </div>
-                <div className="wrapper flex flex-wrap justify-center max-[911px]:justify-between    py-[50px] gap-[10px]   ">
+                <div data-aos="fade-up" className='bg-[#f75454] max-[650px]:hidden block rounded-[15px] px-[25px] py-[15px]'>
+                    <ul className=" flex justify-between">
+                        <li className="">
+                            <button onClick={() => setCategoryValue("")} className="text-white      ">
+                                All
+                            </button>
+                        </li>
+                        {
+                            dataGetCategory?.map(el => (
+                                <li key={el.id} className="">
+                                    <button onClick={() => setCategoryValue(el.title)} className="capitalize text-white">
+                                        {el.title}
+                                    </button>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+                <div data-aos="fade-up" className='flex justify-end '>
+                    <select
+                        value={categoryValue}
+                        onChange={(e) => setCategoryValue(e.target.value)}
+                        name="" id="" className=" hidden  outline-none  bg-[#f75454] text-white px-3 py-2 rounded-xl max-[650px]:block">
+                        <option value="">All</option>
+                        {
+                            dataGetCategory?.map(el => (
+                                <option key={el.id} value={el.title}>
+                                    {el.title}
+                                </option>
+                            ))
+                        }
+                    </select>
+                </div>
+                <div className="wrapper flex flex-wrap justify-center min-[911px]:justify-between    py-[50px] gap-[10px]   ">
                     {products}
                 </div>
                 {

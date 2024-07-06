@@ -32,11 +32,11 @@ const Hero = () => {
                     pagination={{
                         clickable: true,
                     }}
-                    navigation={true}
+                    navigation={false}
                     modules={[Autoplay, Pagination, Navigation]}
                     className="mySwiper"
                 >
-                    <SwiperSlide>
+                    <SwiperSlide >
                         <div data-aos="fade-up" className='bg-black p-[18px] rounded-md  grid  min-[650px]:grid-cols-2 w-full '>
                             <div className='min-[400px]:pt-[40px] grid gap-5  min-[400px]:pl-[64px] pb-[47px]    '>
                                 <div data-aos="zoom-in" className='flex items-center gap-[34px]'>
@@ -54,6 +54,138 @@ const Hero = () => {
                                 </div>
                             </div>
                             <div data-aos="zoom-in" className='flex justify-center'>
+                                <img className='w-full' src={hero} alt="" />
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div data-aos="fade-up" className='bg-black p-[18px] rounded-md   grid  min-[650px]:grid-cols-2 w-full '>
+                            <div className='min-[400px]:pt-[40px] grid gap-5  min-[400px]:pl-[64px] pb-[47px]    '>
+                                <div data-aos="zoom-in" className='flex items-center gap-[34px]'>
+                                    <div>
+                                        <img src={apple} alt="" />
+                                    </div>
+                                    <p className='text-white text-[16px] leading-[24px]  '>iPhone 14 Series</p>
+                                </div>
+                                <h1 data-aos="zoom-in" className='text-white text-[35px] lg:text-[48px] font-[600] text-start max-w-[290px] leading-[40px] lg:leading-[60px]   '>Up to 10% off Voucher</h1>
+                                <div data-aos="zoom-in" className='flex pt-[2px] items-center gap-2'>
+                                    <p className='text-white border-b-2 mb-2 font-[500] leading-[24px] text-[16px]    '>Shop Now</p>
+                                    <div className='flex items-center'>
+                                        <img src={show} alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-aos="zoom-in" className='flex justify-center '>
+                                <img className='w-full' src={hero} alt="" />
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div data-aos="fade-up" className='bg-black p-[18px] rounded-md   grid  min-[650px]:grid-cols-2 w-full '>
+                            <div className='min-[400px]:pt-[40px] grid gap-5  min-[400px]:pl-[64px] pb-[47px]    '>
+                                <div data-aos="zoom-in" className='flex items-center gap-[34px]'>
+                                    <div>
+                                        <img src={apple} alt="" />
+                                    </div>
+                                    <p className='text-white text-[16px] leading-[24px]  '>iPhone 14 Series</p>
+                                </div>
+                                <h1 data-aos="zoom-in" className='text-white text-[35px] lg:text-[48px] font-[600] text-start max-w-[290px] leading-[40px] lg:leading-[60px]   '>Up to 10% off Voucher</h1>
+                                <div data-aos="zoom-in" className='flex pt-[2px] items-center gap-2'>
+                                    <p className='text-white border-b-2 mb-2 font-[500] leading-[24px] text-[16px]    '>Shop Now</p>
+                                    <div className='flex items-center'>
+                                        <img src={show} alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-aos="zoom-in" className='flex justify-center '>
+                                <img className='w-full' src={hero} alt="" />
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div data-aos="fade-up" className='bg-black p-[18px] rounded-md   grid  min-[650px]:grid-cols-2 w-full '>
+                            <div className='min-[400px]:pt-[40px] grid gap-5  min-[400px]:pl-[64px] pb-[47px]    '>
+                                <div data-aos="zoom-in" className='flex items-center gap-[34px]'>
+                                    <div>
+                                        <img src={apple} alt="" />
+                                    </div>
+                                    <p className='text-white text-[16px] leading-[24px]  '>iPhone 14 Series</p>
+                                </div>
+                                <h1 data-aos="zoom-in" className='text-white text-[35px] lg:text-[48px] font-[600] text-start max-w-[290px] leading-[40px] lg:leading-[60px]   '>Up to 10% off Voucher</h1>
+                                <div data-aos="zoom-in" className='flex pt-[2px] items-center gap-2'>
+                                    <p className='text-white border-b-2 mb-2 font-[500] leading-[24px] text-[16px]    '>Shop Now</p>
+                                    <div className='flex items-center'>
+                                        <img src={show} alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-aos="zoom-in" className='flex justify-center '>
+                                <img className='w-full' src={hero} alt="" />
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div data-aos="fade-up" className='bg-black p-[18px] rounded-md   grid  min-[650px]:grid-cols-2 w-full '>
+                            <div className='min-[400px]:pt-[40px] grid gap-5  min-[400px]:pl-[64px] pb-[47px]    '>
+                                <div data-aos="zoom-in" className='flex items-center gap-[34px]'>
+                                    <div>
+                                        <img src={apple} alt="" />
+                                    </div>
+                                    <p className='text-white text-[16px] leading-[24px]  '>iPhone 14 Series</p>
+                                </div>
+                                <h1 data-aos="zoom-in" className='text-white text-[35px] lg:text-[48px] font-[600] text-start max-w-[290px] leading-[40px] lg:leading-[60px]   '>Up to 10% off Voucher</h1>
+                                <div data-aos="zoom-in" className='flex pt-[2px] items-center gap-2'>
+                                    <p className='text-white border-b-2 mb-2 font-[500] leading-[24px] text-[16px]    '>Shop Now</p>
+                                    <div className='flex items-center'>
+                                        <img src={show} alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-aos="zoom-in" className='flex justify-center '>
+                                <img className='w-full' src={hero} alt="" />
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div data-aos="fade-up" className='bg-black p-[18px] rounded-md   grid  min-[650px]:grid-cols-2 w-full '>
+                            <div className='min-[400px]:pt-[40px] grid gap-5  min-[400px]:pl-[64px] pb-[47px]    '>
+                                <div data-aos="zoom-in" className='flex items-center gap-[34px]'>
+                                    <div>
+                                        <img src={apple} alt="" />
+                                    </div>
+                                    <p className='text-white text-[16px] leading-[24px]  '>iPhone 14 Series</p>
+                                </div>
+                                <h1 data-aos="zoom-in" className='text-white text-[35px] lg:text-[48px] font-[600] text-start max-w-[290px] leading-[40px] lg:leading-[60px]   '>Up to 10% off Voucher</h1>
+                                <div data-aos="zoom-in" className='flex pt-[2px] items-center gap-2'>
+                                    <p className='text-white border-b-2 mb-2 font-[500] leading-[24px] text-[16px]    '>Shop Now</p>
+                                    <div className='flex items-center'>
+                                        <img src={show} alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-aos="zoom-in" className='flex justify-center '>
+                                <img className='w-full' src={hero} alt="" />
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div data-aos="fade-up" className='bg-black p-[18px] rounded-md   grid  min-[650px]:grid-cols-2 w-full '>
+                            <div className='min-[400px]:pt-[40px] grid gap-5  min-[400px]:pl-[64px] pb-[47px]    '>
+                                <div data-aos="zoom-in" className='flex items-center gap-[34px]'>
+                                    <div>
+                                        <img src={apple} alt="" />
+                                    </div>
+                                    <p className='text-white text-[16px] leading-[24px]  '>iPhone 14 Series</p>
+                                </div>
+                                <h1 data-aos="zoom-in" className='text-white text-[35px] lg:text-[48px] font-[600] text-start max-w-[290px] leading-[40px] lg:leading-[60px]   '>Up to 10% off Voucher</h1>
+                                <div data-aos="zoom-in" className='flex pt-[2px] items-center gap-2'>
+                                    <p className='text-white border-b-2 mb-2 font-[500] leading-[24px] text-[16px]    '>Shop Now</p>
+                                    <div className='flex items-center'>
+                                        <img src={show} alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-aos="zoom-in" className='flex justify-center '>
                                 <img className='w-full' src={hero} alt="" />
                             </div>
                         </div>

@@ -14,7 +14,6 @@ import LoadingSinlePage from "../loading/LoadingSinlePage";
 const Single = () => {
   const { id } = useParams()
   const { data, isLoading } = useGetProductQuery(id)
-  console.log(isLoading);
 
   let product = data?.find(el => +el.id === +id)
 

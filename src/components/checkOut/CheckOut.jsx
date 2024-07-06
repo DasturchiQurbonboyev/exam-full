@@ -21,10 +21,14 @@ const CheckOut = () => {
     const [saveInfo, setSaveInfo] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("bank");
 
+    const [loading, setLoading] = useState(false); // State for loading indicator
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handlePayment = (e) => {
+        setLoading(true); // Set loading to true when sending the message
+
         let text = "Buyurtma %0A%0A"
         text += `Ismi Familyasi: ${person} %0A`
         text += `Kampaniya nomi: ${company} %0A`
@@ -45,13 +49,19 @@ const CheckOut = () => {
 
         let url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${text}&parse_mode=html`
         let api = new XMLHttpRequest()
-        api.open("GET", url, true)
-        api.send()
-        dispatch(clearCart())
-        window.scrollTo(0, 0)
-        toast.success("Buyurtma qabul qilindi, tez orada siz bilan bog'lanamiz")
-
-        navigate('/'); // Home sahifasiga yo'naltirish
+        api.open("GET", url, true);
+        api.onload = function () {
+            setLoading(false); // Set loading to false when message sent successfully
+            dispatch(clearCart());
+            window.scrollTo(0, 0);
+            toast.success("Buyurtma qabul qilindi, tez orada siz bilan bog'lanamiz");
+            navigate('/');
+        };
+        api.onerror = function () {
+            setLoading(false); // Set loading to false on error
+            toast.error("Xatolik yuz berdi, iltimos qayta urinib ko'ring");
+        };
+        api.send();
     }
 
     useEffect(() => {
@@ -269,8 +279,12 @@ const CheckOut = () => {
                                 Apply Coupon
                             </button>
                         </div>
-                        <button onClick={() => { handlePayment() }} className='px-12 py-4 border rounded-md text-white bg-[#DB4444]'>
-                            Place Order
+                        <button
+                            onClick={() => handlePayment()}
+                            className='px-12 py-4 border rounded-md text-white bg-[#DB4444]'
+                            disabled={loading} // Disable button when loading is true
+                        >
+                            {loading ? 'Loading...' : 'Place Order'}
                         </button>
                     </div>
                 </div>

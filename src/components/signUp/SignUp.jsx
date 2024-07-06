@@ -26,7 +26,7 @@ const SignUp = () => {
 
     return (
         <div className='kontainer'>
-            <div className='pt-[60px] grid min-[800px]:grid-cols-2 items-center gap-[50px]'>
+            <div className='max-[600px]:pt-[100px] pt-[60px]grid min-[800px]:grid-cols-2 items-center gap-[50px]'>
                 <div className='max-[800px]:hidden'>
                     <img src={login} alt="" />
                 </div>
