@@ -38,6 +38,13 @@ const Navbar = () => {
     };
   }, []);
 
+
+  const adminLocation = useLocation().pathname;
+
+  if (["/login", "/admin", "/admin/create-product", "/admin/create-category", "/admin/manage-product", "/admin/manage-category"].includes(adminLocation)) {
+    return null;
+  }
+
   return (
     <div className="sticky navbar-shrink">
       <div className={`shadow-md navbar_animation ${scroll ? "scroll" : ""} w-full z-20 bg-white`}>

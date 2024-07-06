@@ -2,9 +2,18 @@ import React from 'react'
 import right from "../../assets/images/footer/icon-send.png"
 import qrKode from "../../assets/images/footer/qr-kode.png"
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const Footer = () => {
+
+
+    const adminLocation = useLocation().pathname;
+
+    if (["/login", "/admin", "/admin/create-product", "/admin/create-category", "/admin/manage-product", "/admin/manage-category"].includes(adminLocation)) {
+        return null;
+    }
+
+
     return (
         <div>
 

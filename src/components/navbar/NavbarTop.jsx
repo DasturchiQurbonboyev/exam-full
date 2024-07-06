@@ -1,6 +1,12 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom';
 
 const NavbarTop = () => {
+    const adminLocation = useLocation().pathname;
+
+    if (["/login", "/admin", "/admin/create-product", "/admin/create-category", "/admin/manage-product", "/admin/manage-category"].includes(adminLocation)) {
+        return null;
+    }
 
     return (
         <div className='bg-black py-[11px] hidden lg:block  '>

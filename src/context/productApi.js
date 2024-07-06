@@ -12,18 +12,12 @@ export const productApi = api.injectEndpoints({
             providesTags: ["Product"]
         }),
 
-        // Get single product request
-        getProductSingle: build.query({
-            query: (id) => ({
-                url: `/products/${id}`,
-            }),
-            providesTags: ["Product"],
-        }),
+
 
         // Post request
         createProduct: build.mutation({
             query: (body) => ({
-                url: "/products",
+                url: "/product",
                 method: "POST",
                 body
             }),
@@ -33,7 +27,7 @@ export const productApi = api.injectEndpoints({
         // Delete request
         deleteProduct: build.mutation({
             query: (id) => ({
-                url: `/products/${id}`,
+                url: `/product/${id}`,
                 method: "DELETE"
             }),
             invalidatesTags: ["Product"]
@@ -42,7 +36,7 @@ export const productApi = api.injectEndpoints({
         // Updatet request
         updateProduct: build.mutation({
             query: ({ body, id }) => ({
-                url: `/products/${id}`,
+                url: `/product/${id}`,
                 method: "PUT",
                 body
             }),
@@ -52,9 +46,8 @@ export const productApi = api.injectEndpoints({
 })
 
 export const {
+    useGetProductQuery,
     useCreateProductMutation,
     useDeleteProductMutation,
-    useGetProductQuery,
     useUpdateProductMutation,
-    useGetProductSingleQuery
 } = productApi

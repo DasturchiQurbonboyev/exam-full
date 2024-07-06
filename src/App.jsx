@@ -19,6 +19,11 @@ import Contact from "./pages/contact/Contact";
 import NavbarTop from "./components/navbar/NavbarTop.jsx";
 import Auth from './components/auth/Auth.jsx'
 import YouTube from "./components/loading/LoadingProduct.jsx";
+import AdminPage from './pages/admin/AdminPage.jsx'
+import CreateProductPage from './pages/admin/create-product/CreateProductPage.jsx'
+import CreateCategoryPage from './pages/admin/create-category/CreateCategoryPage.jsx'
+import ManageProductPage from './pages/admin/manage-product/ManageProductPage.jsx'
+import ManageCategoryPage from './pages/admin/manage-category/ManageCategoryPage.jsx'
 
 function App() {
 
@@ -39,6 +44,12 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/checkOut" element={<CheckOut />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path='/admin' element={<AdminPage />} >
+            <Route path='create-product' element={<CreateProductPage />} />
+            <Route path='create-category' element={<CreateCategoryPage />} />
+            <Route path='manage-product' element={<ManageProductPage />} />
+            <Route path='manage-category' element={<ManageCategoryPage />} />
+          </Route>
         </Route>
       </Routes>
       <Footer />
