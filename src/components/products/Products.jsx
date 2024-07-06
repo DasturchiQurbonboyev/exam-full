@@ -182,7 +182,16 @@ const Products = ({ homeTitle, homeType, buttonNext, allProductBtntop, allProduc
                     </select>
                 </div>
                 <div className="wrapper flex flex-wrap justify-center min-[911px]:justify-between    py-[50px] gap-[10px]   ">
-                    {products}
+                    {
+                        filteredProduct.length > 0
+                            ?
+                            products
+                            :
+
+                            <h2 className='text-center w-full text-[35px]'>
+                                Hozircha maxsulot yo'q!
+                            </h2>
+                    }
                 </div>
                 {
                     allProductBtnbottom &&
