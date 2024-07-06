@@ -13,7 +13,7 @@ const CreateProductPage = () => {
     const { data: dataGetCategory } = useGetCategoryQuery();
     const [createProduct, { data: dataCreateProduct, error: errorCreateProduct }] = useCreateProductMutation();
 
-    console.log(errorCreateProduct);
+    console.log("error>>>", errorCreateProduct);
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [oldPrice, setOldPrice] = useState("");
@@ -21,7 +21,6 @@ const CreateProductPage = () => {
     const [description, setDescription] = useState("");
     const [images, setImages] = useState([]);
     const [imageInput, setImageInput] = useState("");
-
 
 
 
@@ -33,13 +32,13 @@ const CreateProductPage = () => {
         }
         let product = {
             title,
-            price: +price,
-            oldPrice: +oldPrice,
+            price,
+            oldPrice,
             category,
             description,
             image: images,
         };
-        console.log("Creating product:", product); // Konsolga chiqarish
+        // console.log("Creating product:", product); // Konsolga chiqarish
         createProduct(product);
         setTitle("");
         setPrice("");
