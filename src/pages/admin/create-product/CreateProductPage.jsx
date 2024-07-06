@@ -22,22 +22,12 @@ const CreateProductPage = () => {
     const [images, setImages] = useState([]);
     const [imageInput, setImageInput] = useState("");
 
-
-
     const handleCreateProduct = (e) => {
         e.preventDefault();
         if (!title || !price || !category || images.length === 0) {
             toast.error("Please fill in all required fields");
             return;
         }
-        let product = {
-            title,
-            price,
-            oldPrice,
-            category,
-            description,
-            image: images,
-        };
         // console.log("Creating product:", product); // Konsolga chiqarish
         createProduct(product);
         setTitle("");
