@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import editblack from '../../../assets/admin/editblack.png';
 import { RiCloseLine, RiDeleteBin6Line } from 'react-icons/ri';
 import './ManageProductPage.css';
@@ -9,38 +9,50 @@ import 'swiper/css';
 import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
 import { EffectCube, Pagination } from 'swiper/modules';
+import { useGetCategoryQuery } from '../../../context/categoryApi';
 
 const ManageProductPage = () => {
     const { data: products, isLoading, isError } = useGetProductQuery();
     const [updateProduct] = useUpdateProductMutation();
     const [deleteProduct] = useDeleteProductMutation();
+    const { data: dataGetCategory } = useGetCategoryQuery();
 
     const [editProduct, setEditProduct] = useState(null);
+    const [image, setImage] = useState([]);
 
     const handleEdit = (product) => {
         setEditProduct(product);
+        setImage(product.image || []);
     };
 
     const handleDelete = async (id) => {
         try {
             await deleteProduct(id);
-            // Handle success (e.g., show a message)
         } catch (error) {
             console.error('Failed to delete product:', error);
-            // Handle error (e.g., show an error message)
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await updateProduct({ id: editProduct.id, body: editProduct });
-            // Handle success (e.g., show a success message)
-            setEditProduct(null); // Clear edit mode
+            const { oldPrice, ...rest } = editProduct;
+            await updateProduct({ id: editProduct.id, body: { ...rest, price: editProduct.price, image } });
+
+            setEditProduct(null);
         } catch (error) {
             console.error('Failed to update product:', error);
-            // Handle error (e.g., show an error message)
         }
+    };
+
+    const handleAddImage = () => {
+        setImage([...image, '']);
+    };
+
+    const handleRemoveImage = (index) => {
+        const updatedImages = [...image];
+        updatedImages.splice(index, 1);
+        setImage(updatedImages);
     };
 
     return (
@@ -71,7 +83,7 @@ const ManageProductPage = () => {
                                     modules={[EffectCube, Pagination]}
                                     className='mySwiper'
                                 >
-                                    {product.image.map((img, idx) => (
+                                    {product.image?.map((img, idx) => (
                                         <SwiperSlide key={idx}>
                                             <img className='swiperImg' src={img} alt={`Product Image ${idx}`} />
                                         </SwiperSlide>
@@ -85,7 +97,7 @@ const ManageProductPage = () => {
                                 <div>
                                     <p>
                                         <del className='text-[#9F9F9F] text-[12px]'>
-                                            {product.price + 50}₽
+                                            {product.oldPrice}₽
                                         </del>
                                     </p>
                                     <p className='text-[#454545] text-[20px] leading-[22px] font-[700]'>
@@ -143,6 +155,122 @@ const ManageProductPage = () => {
                                 />
                             </div>
 
+                            <div>
+                                <label className='text-[14px]' htmlFor='oldPrice'>
+                                    Old Price:
+                                </label>
+                                <br />
+                                <input
+                                    value={editProduct.oldPrice}
+                                    onChange={(e) =>
+                                        setEditProduct((prev) => ({
+                                            ...prev,
+                                            oldPrice: e.target.value,
+                                        }))
+                                    }
+                                    className='border mt-1 w-full px-3 py-1 rounded-[8px] outline-none'
+                                    type='text'
+                                    id='oldPrice'
+                                />
+                            </div>
+
+                            <div>
+                                <label className='text-[14px]' htmlFor='price'>
+                                    Price:
+                                </label>
+                                <br />
+                                <input
+                                    value={editProduct.price}
+                                    onChange={(e) =>
+                                        setEditProduct((prev) => ({
+                                            ...prev,
+                                            price: e.target.value,
+                                        }))
+                                    }
+                                    className='border mt-1 w-full px-3 py-1 rounded-[8px] outline-none'
+                                    type='text'
+                                    id='price'
+                                />
+                            </div>
+
+                            <div>
+                                <label className='text-[14px]' htmlFor='category'>
+                                    Category:
+                                </label>
+                                <br />
+                                <select
+                                    value={editProduct.category}
+                                    onChange={(e) =>
+                                        setEditProduct((prev) => ({
+                                            ...prev,
+                                            category: e.target.value,
+                                        }))
+                                    }
+                                    className='w-full border mt-2 mb-[10px] bg-[#F8f8f8] px-4 py-[8px] rounded-[10px] outline-none '
+                                    name=""
+                                    id="Category"
+                                >
+                                    {dataGetCategory?.map((el, inx) => (
+                                        <option key={inx} value={el.title}>{el.title}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className='text-[14px]' htmlFor='description'>
+                                    Description:
+                                </label>
+                                <br />
+                                <textarea
+                                    value={editProduct.description}
+                                    onChange={(e) =>
+                                        setEditProduct((prev) => ({
+                                            ...prev,
+                                            description: e.target.value,
+                                        }))
+                                    }
+                                    className='border resize-none overflow-auto mt-1 w-full px-3 py-1 rounded-[8px] outline-none'
+                                    id='description'
+                                />
+                            </div>
+
+                            <div>
+                                <label className='text-[14px]' htmlFor='image'>
+                                    Image:
+                                </label>
+                                <br />
+                                {image.map((img, idx) => (
+                                    <div key={idx} className='flex items-center mb-[5px]'>
+                                        <input
+                                            value={img}
+                                            onChange={(e) => {
+                                                const updatedImage = [...image];
+                                                updatedImage[idx] = e.target.value;
+                                                setImage(updatedImage);
+                                            }}
+                                            className='border w-full mt-[8px] mb-[10px] bg-[#F8F8F8] rounded-[10px] px-4 py-[8px] outline-none'
+                                            type="text"
+                                            name={`image-${idx}`}
+                                            id={`image-${idx}`}
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => handleRemoveImage(idx)}
+                                            className='text-white bg-[#e74c3c] px-[10px] py-[5px] rounded-[5px] ml-[10px]'
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                ))}
+                                <button
+                                    type="button"
+                                    onClick={handleAddImage}
+                                    className='text-white bg-[#454545] px-[20px] py-[5px] rounded-[5px] mt-[10px]'
+                                >
+                                    Add Image
+                                </button>
+                            </div>
+
                             <button
                                 type='submit'
                                 className='border px-[15px] py-[4px] mt-[25px] rounded-[10px] bg-[#0006] text-white'
@@ -158,6 +286,3 @@ const ManageProductPage = () => {
 };
 
 export default ManageProductPage;
-
-
-
