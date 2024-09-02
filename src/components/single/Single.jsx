@@ -24,6 +24,7 @@ const Single = () => {
 
   const [almashish, setAlmashish] = useState(0)
 
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
@@ -75,14 +76,20 @@ const Single = () => {
                 <img className="w-full object-cover" src={product?.image[3]} alt="" />
               </div>
             </div >
-            <div className="flex w-full justify-center items-center object-contain img-box h-full max-lg:mx-auto ">
+            <div className="relative flex w-full justify-center items-center object-contain img-box h-full max-lg:mx-auto ">
               <img
                 src={product?.image[almashish]}
                 alt="Yellow Tropical Printed Shirt image"
                 className="object-contain min-[750px]:h-80 w-96"
               />
-            </div>
-          </div >
+              <div className=" grid grid-cols-4 h-full absolute w-full">
+                <div onMouseEnter={() => setAlmashish(0)} className=""></div>
+                <div onMouseEnter={() => setAlmashish(1)} className=""></div>
+                <div onMouseEnter={() => setAlmashish(2)} className=""></div>
+                <div onMouseEnter={() => setAlmashish(3)} className=""></div>
+              </div>
+            </div >
+          </div>
           <div className="data w-full lg:pr-8 pr-0 xl:justify-start justify-center flex items-center max-lg:pb-10 xl:my-2 lg:my-5 my-0">
             <div className="data w-full max-w-xl">
               <h2 className="font-manrope font-bold text-[24px] leading-10 text-gray-900  capitalize">
